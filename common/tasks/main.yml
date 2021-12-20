@@ -1,0 +1,11 @@
+---
+- name: install ntp
+  yum: "name=ntp state=present"
+  tags: ntp
+- name: copy ntp.conf
+  template: "src=templates/ntp.conf dest=/etc/ntp.conf"
+  notify: restart ntp
+  tags: ntp
+- name: copy DNS 
+  template: "src=templates/resolv.conf dest=/etc/resolv.conf"
+  tags: dns

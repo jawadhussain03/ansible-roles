@@ -1,0 +1,15 @@
+---
+# tasks file for apache
+- name: install httpd
+  yum: "name={{ item }} state=present"
+  with_items:
+   - httpd
+   - httpd-tools
+- name: copy httpd.conf
+  copy: "src=files/httpd.conf dest=/etc/httpd/conf/httpd.conf"
+  tags: HTTPD
+- name: copy index.html
+  copy: "src=files/index.html dest=/var/www/html/index.html"
+  notify: restart apache
+  tags: HTTPD
+  
